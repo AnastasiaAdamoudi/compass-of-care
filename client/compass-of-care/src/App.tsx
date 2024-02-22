@@ -1,35 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import { Navbar, Footer } from "./components/common";
+import { 
+  Home,
+  About,
+  Calendar,
+  Contacts,
+  Policies,
+  Login,
+  MainDashboard,
+  EmployeesMainDashboard,
+  EmployeeList,
+  EmployeeDetails,
+  EmployeeProfileList,
+  EmployeeProfileDetails,
+  TrainingList,
+  EmployeeIncidentList,
+  EmployeeIncidentDetails,
+  ServiceUserMainDashboard,
+  ServiceUserList,
+  ServiceUserDetails,
+  CarePlanList,
+  CarePlanDetails,
+  MedicationList,
+  RiskAssessmentList,
+  ServiceUserIncidentList,
+  ServiceUserIncidentDetails,
+} from "./pages";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+
+  const [modalState, setModalState] = useState({
+    privacyOpen: false,
+    accessibilityOpen: false,
+  });
+
+  const closeModal = () => {
+    setModalState({
+      privacyOpen: false,
+      accessibilityOpen: false,
+    });
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Router>
+      <div
+        id="scroll-container"
+        className="bg-cover bg-n-repeat bg-center overflow-hidden"
+      >
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+        <Footer
+          modalState={modalState}
+          setModalState={setModalState}
+          closeModal={closeModal}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </Router>
+  );
+};
 
-export default App
+export default App;
