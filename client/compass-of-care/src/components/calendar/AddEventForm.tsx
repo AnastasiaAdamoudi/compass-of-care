@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import TimePicker from 'react-time-picker';
@@ -6,6 +6,7 @@ import { Modal } from 'react-responsive-modal';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import './AddEventForm.css';
 
 const CreateEventForm = ({
   isOpen,
@@ -36,6 +37,14 @@ const CreateEventForm = ({
     eventDescription: z
       .string()
       .nonempty({ message: 'Event description is required' }),
+    eventStartDate: z.
+      string()
+      .nonempty({ message: 'Start date is required' }),
+    eventEndDate: z
+    .string()
+    .nonempty({ message: 'End date is required' }),
+    eventStartTime: z.string().nonempty({ message: 'Start time is required' }),
+    eventEndTime: z.string().nonempty({ message: 'End time is required' }),
   });
 
   const { register, handleSubmit, formState, reset } = useForm({
@@ -89,9 +98,10 @@ const CreateEventForm = ({
       <div className="form-container">
         <div className="form-content">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-group">
-              <label htmlFor="eventTitle" className="form-label">
-                Event Title
+            <div className="form-group pb-5">
+            <div className="flex flex-row justify-center items-center gap-3 w-full">
+              <label htmlFor="eventTitle" className="font-body font-bold text-primary text-xl">
+                Event Title:
               </label>
               <input
                 {...register('eventTitle', { required: true })}
@@ -100,66 +110,94 @@ const CreateEventForm = ({
                 id="eventTitle"
                 placeholder="Enter event title"
               />
-              <div className="error-message">
+              </div>
+               <div className="error-message justify-center text-right text-red-500 italic font-body text-md">
                 {errors?.eventTitle?.message}
               </div>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="eventDescription" className="form-label">
-                Event Description
-              </label>
-              <textarea
-                {...register('eventDescription', { required: true })}
-                className="form-control"
-                id="eventDescription"
-                placeholder="Enter event description"
-              ></textarea>
-              <div className="error-message">
+            <div className="form-group pb-5">
+              <div className="flex flex-row justify-center items-center gap-3 w-full">
+                <label htmlFor="eventDescription" className="font-body font-bold text-primary text-xl">
+                  Event Description:
+                </label>
+                <textarea
+                  {...register('eventDescription', { required: true })}
+                  className="form-control h-32 w-full"
+                  id="eventDescription"
+                  placeholder="Enter event description"
+                ></textarea>
+              </div>
+              <div className="error-message justify-center text-right text-red-500 italic font-body text-md">
                 {errors?.eventDescription?.message}
               </div>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Start Date</label>
+            {/* Start Date */}
+            <div className="form-group pb-5">
+            <div className="flex flex-row justify-center items-center gap-3 w-full">
+              <label className="font-body font-bold text-primary text-xl">Start Date:</label>
               <DatePicker
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 dateFormat="dd/MM/yyyy"
                 className="form-control"
               />
+              </div>
+               <div className="error-message justify-center text-right text-red-500 italic font-body text-md">
+                {errors?.eventStartDate?.message}
+              </div>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">End Date</label>
+            {/* End Date */}
+            <div className="form-group pb-5">
+            <div className="flex flex-row justify-center items-center gap-3 w-full">
+              <label className="font-body font-bold text-primary text-xl">End Date:</label>
               <DatePicker
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
                 dateFormat="dd/MM/yyyy"
                 className="form-control"
               />
+              </div>
+               <div className="error-message justify-center text-right text-red-500 italic font-body text-md">
+                {errors?.eventEndDate?.message}
+              </div>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Start Time</label>
+            {/* Start Time */}
+            <div className="form-group pb-5">
+            <div className="flex flex-row justify-center items-center gap-3 w-full">
+              <label className="font-body font-bold text-primary text-xl pr-4">Start Time:</label>
               <TimePicker
                 value={startTime}
                 onChange={setStartTime}
                 className="form-control"
               />
+              </div>
+              <div className="error-message">
+                {errors?.eventStartTime?.message}
+              </div>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">End Time</label>
+            {/* End Time */}
+            <div className="form-group pb-5">
+            <div className="flex flex-row justify-center items-center gap-3 w-full">
+              <label className="font-body font-bold text-primary text-xl pr-4">End Time:</label>
               <TimePicker
                 value={endTime}
                 onChange={setEndTime}
                 className="form-control"
               />
+              </div>
+              <div className="error-message">
+                {errors?.eventEndTime?.message}
+              </div>
             </div>
 
+            {/* Submit Button */}
             <div className="submit-button-container">
-              <button type="submit" className="submit-button">
+              <button type="submit" className="bg-tertiaryDark hover:bg-secondaryDark text-white font-bold py-2 px-4 rounded-xl mt-4">
                 Create Event
               </button>
             </div>
