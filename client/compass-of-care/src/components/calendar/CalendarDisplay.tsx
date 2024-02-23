@@ -11,6 +11,7 @@ import startOfHour from 'date-fns/startOfHour'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import './CalendarDisplay.css';
+import AddEventButton from './AddEventButton';
 
 const CalendarDisplay: FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
@@ -37,19 +38,9 @@ const CalendarDisplay: FC = () => {
     console.log(data)
   }
 
-  const addEvent = () => {
-    const newEvent: Event = {
-      title: 'New Event',
-      start: new Date(),
-      end: new Date(),
-    };
-
-    setEvents(prevEvents => [...prevEvents, newEvent]);
-  };
-
   return (
     <div className="w-[90%] mb-10">
-      <button onClick={addEvent}>Add Event</button>
+      <AddEventButton />
       <DnDCalendar
         defaultView='week'
         events={events}

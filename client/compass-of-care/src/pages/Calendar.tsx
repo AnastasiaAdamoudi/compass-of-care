@@ -1,4 +1,4 @@
-import CalendarDisplay from '../components/calendar/CalendarDisplay';
+import { CalendarDisplay, AddEventButton } from '../components/calendar/index';
 import BackLink from '../components/common/back-links/BackLink';
 
 const Calendar = () => {
