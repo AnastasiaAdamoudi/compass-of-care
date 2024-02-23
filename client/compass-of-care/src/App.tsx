@@ -8,6 +8,7 @@ import {
   Policies,
   Login,
   MainDashboard,
+  Notes,
   EmployeesMainDashboard,
   EmployeeList,
   EmployeeDetails,
@@ -59,6 +60,7 @@ const App = () => {
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/policies" element={<Policies />} />
+          <Route path="/notes" element={<Notes />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<MainDashboard />} />
           <Route path="/employees" element={<EmployeesMainDashboard />} />

@@ -4,6 +4,7 @@ import Contacts from "./Contacts";
 import Policies from "./Policies";
 import Login from "./Login";
 import MainDashboard from "./MainDashboard";
+import Notes from "./Notes";
 
 import EmployeesMainDashboard from "./employees/EmployeesMainDashboard";
 import EmployeeList from "./employees/EmployeeList";
@@ -31,6 +32,7 @@ export {
     Policies,
     Login,
     MainDashboard,
+    Notes,
     EmployeesMainDashboard,
     EmployeeList,
     EmployeeDetails,
