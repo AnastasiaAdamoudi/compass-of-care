@@ -1,11 +1,16 @@
-import React from 'react'
+import CalendarDisplay from '../components/calendar/CalendarDisplay';
+import BackLink from '../components/common/back-links/BackLink';
 
 const Calendar = () => {
   return (
-    <div>
-      
+    <div className="bg-cover bg-n-repeat bg-center overflow-hidden bg-background inset-0 w-full h-full min-h-screen">
+        <BackLink to="/dashboard" />
+        <div className="flex flex-col justify-center items-center text-center mx-auto w-[90%]">
+        <h1 className="text-4xl md:text-5xl font-bold font-title w-[90%] mb-3">Calendar</h1>
+        <CalendarDisplay />
+    </div>
     </div>
   )
 }
 
-export default Calendar
+export default Calendar;
