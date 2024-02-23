@@ -1,33 +1,31 @@
 import Home from "./Home";
-import About from "./About";
 import Calendar from "./Calendar";
-import Contacts from "./Contact";
+import Contacts from "./Contacts";
 import Policies from "./Policies";
 import Login from "./Login";
 import MainDashboard from "./MainDashboard";
 
-import EmployeesMainDashboard from "./EmployeesMainDashboard";
-import EmployeeList from "./EmployeeList";
-import EmployeeDetails from "./EmployeeDetails";
-import EmployeeProfileList from "./EmployeeProfile";
-import EmployeeProfileDetails from "./EmployeeProfileDetails";
-import TrainingList from "./TrainingList";
-import EmployeeIncidentList from "./IncidentList";
-import EmployeeIncidentDetails from "./IncidentDetails";
+import EmployeesMainDashboard from "./employees/EmployeesMainDashboard";
+import EmployeeList from "./employees/EmployeeList";
+import EmployeeDetails from "./employees/EmployeeDetails";
+import EmployeeProfileList from "./employees/EmployeeProfileList";
+import EmployeeProfileDetails from "./employees/EmployeeProfileDetails";
+import TrainingList from "./employees/TrainingList";
+import EmployeeIncidentList from "./employees/EmployeeIncidentList";
+import EmployeeIncidentDetails from "./employees/EmployeeIncidentDetails";
 
-import ServiceUserMainDashboard from "./ServiceUserMainDashboard";
-import ServiceUserList from "./ServiceUserList";
-import ServiceUserDetails from "./ServiceUserDetails";
-import CarePlanList from "./ServiceUserProfile";
-import CarePlanDetails from "./ServiceUserProfileDetails";
-import MedicationList from "./MedicationList";
-import RiskAssessmentList from "./RiskAssessmentList";
-import ServiceUserIncidentList from "./IncidentList";
-import ServiceUserIncidentDetails from "./IncidentDetails";
+import ServiceUserMainDashboard from "./service-users/ServiceUserMainDashboard";
+import ServiceUserList from "./service-users/ServiceUserList";
+import ServiceUserDetails from "./service-users/ServiceUserDetails";
+import CarePlanList from "./service-users/CarePlanList";
+import CarePlanDetails from "./service-users/CarePlanDetails";
+import MedicationList from "./service-users/MedicationList";
+import RiskAssessmentList from "./service-users/RiskAssessmentList";
+import ServiceUserIncidentList from "./service-users/ServiceUserIncidentList";
+import ServiceUserIncidentDetails from "./service-users/ServiceUserIncidentDetails";
 
 export {
     Home,
-    About,
     Calendar,
     Contacts,
     Policies,

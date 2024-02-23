@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CalendarEvent = () => {
+const RiskAssessmentList = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const CalendarEvent = () => {
   )
 }
 
-export default CalendarEvent
+export default RiskAssessmentList
