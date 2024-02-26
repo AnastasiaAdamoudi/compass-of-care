@@ -2,7 +2,7 @@ import { useState } from "react";
 import { backArrowGreen, backArrowRed } from "../../../assets";
 import { Link } from "react-router-dom";
 
-const BackLink = ({ to, doubleArrows }) => {
+const BackLink = ({ to, label, doubleArrows }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -21,7 +21,9 @@ const BackLink = ({ to, doubleArrows }) => {
           alt="back arrow"
           className={`w-8 h-8 mt-4 ${doubleArrows ? "-ml-3" : "ml-8"}`}
         />
-        <p className="text-tertiaryDark hover:text-secondaryDark text-xl font-body mt-4 ml-2">main dashboard</p>
+        <p className={`text-xl font-body mt-4 ml-2 ${isHovered ? "text-secondaryDark" : "text-tertiaryDark"}`}>
+          {label}
+        </p>
       </Link>
     </div>
   );

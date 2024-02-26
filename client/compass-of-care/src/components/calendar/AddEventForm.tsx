@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import 'react-time-picker/dist/TimePicker.css';
+import 'react-clock/dist/Clock.css';
 import TimePicker from 'react-time-picker';
+import { format } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
 import { Modal } from 'react-responsive-modal';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,10 +19,13 @@ const CreateEventForm = ({
   updateEvents,
   eventsArrayLength,
 }) => {
+  const [eventTitle, setEventTitle] = useState('');
+  const [eventDescription, setEventDescription] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [startTime, setStartTime] = useState('00:00');
   const [endTime, setEndTime] = useState('00:00');
+  const [allDay, setAllDay] = useState(false);
 
   const closeIcon = (
     <svg fill="#841F52" viewBox="0 0 20 20" width={28} height={28}>
@@ -45,7 +52,8 @@ const CreateEventForm = ({
     .nonempty({ message: 'End date is required' }),
     eventStartTime: z.string().nonempty({ message: 'Start time is required' }),
     eventEndTime: z.string().nonempty({ message: 'End time is required' }),
-  });
+    allDay: z.boolean().optional()
+    });
 
   const { register, handleSubmit, formState, reset } = useForm({
     resolver: zodResolver(schema),
@@ -55,26 +63,32 @@ const CreateEventForm = ({
 
   const onSubmit = async (formData) => {
     try {
+      const formattedStartDate = format(startDate, 'yyyy-MM-dd');
+      const formattedEndDate = format(endDate, 'yyyy-MM-dd');
+      const formattedStartTime = startTime;
+      const formattedEndTime = endTime;
+  
       const newEvent = {
         eventTitle: formData.eventTitle,
         eventDescription: formData.eventDescription,
-        eventStartDate: startDate,
-        eventEndDate: endDate,
-        eventStartTime: startTime,
-        eventEndTime: endTime,
+        eventStartDate: formattedStartDate,
+        eventEndDate: formattedEndDate,
+        eventStartTime: formattedStartTime,
+        eventEndTime: formattedEndTime,
+        allDay: allDay,
       };
-
+  
       console.log('Events: ', events);
       console.log('Form data: ', formData);
       console.log('New event created: ', newEvent);
-
+  
       // Update events array
       const updatedEvents = [...events, newEvent];
       updateEvents(updatedEvents);
-
+  
       // Reset form fields
       reset();
-
+  
       onClose();
     } catch (err) {
       console.error(err.message);
@@ -100,7 +114,7 @@ const CreateEventForm = ({
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group pb-5">
             <div className="flex flex-row justify-center items-center gap-3 w-full">
-              <label htmlFor="eventTitle" className="font-body font-bold text-primary text-xl">
+              <label htmlFor="eventTitle" className="font-body font-bold text-primary text-xl pr-2">
                 Event Title:
               </label>
               <input
@@ -118,7 +132,7 @@ const CreateEventForm = ({
 
             <div className="form-group pb-5">
               <div className="flex flex-row justify-center items-center gap-3 w-full">
-                <label htmlFor="eventDescription" className="font-body font-bold text-primary text-xl">
+                <label htmlFor="eventDescription" className="font-body font-bold text-primary text-xl pr-2">
                   Event Description:
                 </label>
                 <textarea
@@ -136,11 +150,12 @@ const CreateEventForm = ({
             {/* Start Date */}
             <div className="form-group pb-5">
             <div className="flex flex-row justify-center items-center gap-3 w-full">
-              <label className="font-body font-bold text-primary text-xl">Start Date:</label>
+              <label className="font-body font-bold text-primary text-xl pr-2">Start Date:</label>
               <DatePicker
+                {...register('eventStartDate', { required: true })}
                 selected={startDate}
-                onChange={(date) => setStartDate(date)}
                 dateFormat="dd/MM/yyyy"
+                onChange={(date) => setStartDate(date)}
                 className="form-control"
               />
               </div>
@@ -152,11 +167,12 @@ const CreateEventForm = ({
             {/* End Date */}
             <div className="form-group pb-5">
             <div className="flex flex-row justify-center items-center gap-3 w-full">
-              <label className="font-body font-bold text-primary text-xl">End Date:</label>
+              <label className="font-body font-bold text-primary text-xl pr-2">End Date:</label>
               <DatePicker
+                {...register('eventEndDate', { required: true })}
                 selected={endDate}
-                onChange={(date) => setEndDate(date)}
                 dateFormat="dd/MM/yyyy"
+                onChange={(date) => setEndDate(date)}
                 className="form-control"
               />
               </div>
@@ -168,8 +184,9 @@ const CreateEventForm = ({
             {/* Start Time */}
             <div className="form-group pb-5">
             <div className="flex flex-row justify-center items-center gap-3 w-full">
-              <label className="font-body font-bold text-primary text-xl pr-4">Start Time:</label>
+              <label className="font-body font-bold text-primary text-xl pr-2">Start Time:</label>
               <TimePicker
+                {...register('eventStartTime', { required: true })}
                 value={startTime}
                 onChange={setStartTime}
                 className="form-control"
@@ -183,8 +200,9 @@ const CreateEventForm = ({
             {/* End Time */}
             <div className="form-group pb-5">
             <div className="flex flex-row justify-center items-center gap-3 w-full">
-              <label className="font-body font-bold text-primary text-xl pr-4">End Time:</label>
+              <label className="font-body font-bold text-primary text-xl pr-2">End Time:</label>
               <TimePicker
+                {...register('eventEndTime', { required: true })}
                 value={endTime}
                 onChange={setEndTime}
                 className="form-control"
@@ -193,6 +211,19 @@ const CreateEventForm = ({
               <div className="error-message">
                 {errors?.eventEndTime?.message}
               </div>
+            </div>
+
+            {/* All Day Checkbox */}
+            <div className="form-group pb-5">
+              <label htmlFor="allDay" className="font-body font-bold text-primary text-xl pr-2">
+                All Day: 
+              </label>
+              <input
+                {...register('allDay')}
+                type="checkbox"
+                id="allDay"
+                name="allDay"
+              />
             </div>
 
             {/* Submit Button */}

@@ -14,7 +14,7 @@ const MainDashboard = () => {
   return (
     <div className="bg-cover bg-n-repeat bg-center overflow-hidden bg-background inset-0 w-full h-full min-h-screen">
       <div className="flex flex-col justify-center items-center text-center mx-auto">
-        <h1 className="mt-2 text-4xl md:text-5xl font-bold font-title w-[90%] mb-3">{userProfile.company} Dashboard</h1>
+        <h1 className="mt-2 text-4xl md:text-5xl font-bold font-title text-primary w-[90%] mb-3">{userProfile.company} Dashboard</h1>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 p-4 w-full lg:w-[70%] justify-items-center font-bold font-body text-white uppercase text-3xl">
           {links.map((link, index) => (
             <DashboardLink key={index} to={link.to} label={link.label} color={link.color} hoverColor={link.hoverColor} />
@@ -26,4 +26,3 @@ const MainDashboard = () => {
 };
 
 export default MainDashboard;
-

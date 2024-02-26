@@ -1,5 +1,5 @@
 import DashboardLink from "../../components/dashboard/DashboardLink";
-import { BackLink } from "../../components/common/back-links";
+import BackLink from "../../components/common/back-links/BackLink";
 
 const EmployeesMainDashboard = () => {
   const links = [
@@ -11,7 +11,7 @@ const EmployeesMainDashboard = () => {
 
   return (
     <div className="bg-cover bg-n-repeat bg-center overflow-hidden bg-background inset-0 w-full h-full min-h-screen">
-      <BackLink to="/dashboard" />
+      <BackLink to="/dashboard" label="main dashboard" />
       <div className="flex flex-col justify-center items-center text-center mx-auto">
         <h1 className="text-4xl md:text-5xl font-bold font-title w-[90%] mb-3">Employees</h1>
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 p-4 w-full lg:w-[70%] justify-items-center font-bold font-body text-white uppercase text-3xl">

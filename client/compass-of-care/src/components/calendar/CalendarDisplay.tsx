@@ -12,9 +12,10 @@ import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import './CalendarDisplay.css';
 import AddEventButton from './AddEventButton';
+import { calendarEvents } from '../../data/data';
 
 const CalendarDisplay: FC = () => {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<Event[]>(calendarEvents);
 
   const onEventResize: withDragAndDropProps['onEventResize'] = data => {
     const { start, end } = data
